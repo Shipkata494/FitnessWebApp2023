@@ -1,0 +1,19 @@
+﻿@model MineFoodsViewModel
+@{
+    double calories = (Model.Protein * 4) + (Model.Carbs * 4) + (Model.Fat * 9);
+}
+<div class="text-center row">
+    
+            <div class="card col-4" style="width: 20rem; ">
+                @*<img class="card-img-top" style="width: 18rem;"
+                src="@book.ImageUrl" alt="Book Image">*@
+                <div class="card-body">
+                    <h3 class="card-title mt-1">@Model.Name</h3>
+                    <p class="mb-0">Protein: @Model.Protein</p>
+                    <p class="mb-0">Fat: @Model.Fat</p>
+                    <p class="mb-0">Carbs: @Model.Carbs</p>
+                    <p class="fs-3">Caloreis per 100g: @calories </p>
+                 </div>
+            </div>
+
+</div>

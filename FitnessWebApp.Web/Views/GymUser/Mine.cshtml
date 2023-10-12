@@ -1,0 +1,63 @@
+﻿@model MineFoodsQueryModel
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@{
+  string totalCalories = ((Model.Foods.Sum(x => x.Protein) * 4)
+            + (Model.Foods.Sum(x => x.Carbs) * 4) + (Model.Foods.Sum(x => x.Fat) * 9)).ToString("f2");
+}
+<form method="get">
+    <div class="row">
+        <div class="form-group">
+            <label asp-for="Day" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Day" class="form-control" />
+                <span asp-validation-for="Day" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group mt-4 p-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+@if (Model.Foods.Any())
+{
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                @foreach (var foods in Model.Foods)
+                {
+                    <partial name="_MineFoodsPartial" model="@foods" />
+
+
+                }
+                <p>Total calories: @totalCalories</p>
+            </div>
+            <div class="col-md-4">
+                <div class="small">
+                    <canvas id="pieChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var data = {
+            labels: ['Protein', 'Fat', 'Carbs'],
+            datasets: [{
+                data: [@Model.Foods.Sum(x=>x.Protein), @Model.Foods.Sum(x=>x.Fat), @Model.Foods.Sum(x => x.Carbs)],
+                backgroundColor: ['green', 'red', 'orange'],
+            }]
+        };
+
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+        });
+    </script>
+}
+else
+{
+    <h1>You do not eat any food on this day!</h1>
+}
