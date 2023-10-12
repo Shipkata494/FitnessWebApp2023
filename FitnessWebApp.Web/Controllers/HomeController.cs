@@ -11,7 +11,7 @@
        
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("All","Food");
         }
 
 
