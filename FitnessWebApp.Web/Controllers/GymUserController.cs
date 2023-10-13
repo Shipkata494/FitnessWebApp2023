@@ -96,7 +96,7 @@
             }
             catch (FoodDoesNotExistException)
             {
-                TempData[ErrorMessage] = "This Food Does not exist if you want you can add food here!";
+                TempData[InfoMessage] = "This Food Does not exist if you want you can add food here!";
                 return RedirectToAction("Add", "Food");
             }
            

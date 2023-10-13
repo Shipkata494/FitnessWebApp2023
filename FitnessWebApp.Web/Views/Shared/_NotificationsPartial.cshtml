@@ -6,13 +6,22 @@
 }
 @if (TempData.ContainsKey(WarningMessage))
 {
-    <script>toastr.error('@TempData[WarningMessage]');</script>
+    <script>toastr.warning('@TempData[WarningMessage]');</script>
 }
 @if (TempData.ContainsKey(SuccsessMessage))
 {
-    <script>toastr.error('@TempData[SuccsessMessage]');</script>
+    <script>toastr.succsess('@TempData[SuccsessMessage]');</script>
 }
 @if (TempData.ContainsKey(InfoMessage))
 {
-    <script>toastr.error('@TempData[InfoMessage]');</script>
+    <script>toastr.info('@TempData[InfoMessage]');</script>
 }
+<script>
+    toastr.options = {
+        "positionClass": "toast-top-left",
+        "showDuration": "300", // in milliseconds
+        "hideDuration": "1000", // in milliseconds
+        "timeOut": "5000", // in milliseconds
+        "extendedTimeOut": "1000", // in milliseconds
+    };
+</script>
