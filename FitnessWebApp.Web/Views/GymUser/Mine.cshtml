@@ -22,17 +22,14 @@
 </form>
 @if (Model.Foods.Any())
 {
-    
+    <p>Total calories: @totalCalories</p>
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 @foreach (var foods in Model.Foods)
                 {
                     <partial name="_MineFoodsPartial" model="@foods" />
-
-
-                }
-                <p>Total calories: @totalCalories</p>
+                }               
             </div>
             <div class="col-md-4">
                 <div class="small">
