@@ -12,5 +12,7 @@
         Task AddFoodInFoodsCollectionAsync(string userId, DiaryUserFormModel model);
         Task<MineFoodsQueryModel> MineFoodsAsync(MineFoodsQueryModel queryModel,string userId);
         Task<IEnumerable<ActivitiesSelectionViewModel>> AllActivitiesAsync();
+        Task<double> CaloriesForMaintanceAsync(string userId);
+        
     }
 }

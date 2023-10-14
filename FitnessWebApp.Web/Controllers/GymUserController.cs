@@ -9,6 +9,7 @@
 
     using static FitnessWebApp.Common.NotificationMessegeConstants;
     using FitnessWebApp.Web.ViewModels.Models.Activities;
+    using FitnessWebApp.Web.Infrastructure.Extentions;
 
     public class GymUserController : BaseController
     {
@@ -26,7 +27,7 @@
         [HttpGet]
         public async Task<IActionResult> Become()
         {
-            string? userId = GetUserId();
+            string? userId = User.GetId();
             bool isGymUSer = await gymUserService.GymUserExistsByUserIdAsync(userId);
             if (isGymUSer)
             {
@@ -44,7 +45,7 @@
         [HttpPost]
         public async Task<IActionResult> Become(BecomeGymUserFormModel model)
         {
-            string? userId = GetUserId();
+            string? userId = User.GetId();
             bool isGymUser = await gymUserService.GymUserExistsByUserIdAsync(userId);
             if (isGymUser)
             {
@@ -64,7 +65,7 @@
         [HttpGet]
         public async Task<IActionResult> Diary()
         {
-            string? userId = GetUserId();
+            string? userId = User.GetId();
             bool isGymUserExist = await gymUserService.GymUserExistsByUserIdAsync(userId);          
             if (!isGymUserExist) 
             {
@@ -85,7 +86,7 @@
         [HttpPost]
         public async Task<IActionResult> Diary(DiaryUserFormModel model)
         {
-            string? userId = GetUserId();
+            string? userId = User.GetId();
             bool isGymUser = await gymUserService.GymUserExistsByUserIdAsync(userId);
             if (!isGymUser)
             {
@@ -111,7 +112,7 @@
         [HttpGet]
         public async Task<IActionResult> Mine([FromQuery] MineFoodsQueryModel queryModel)
         {
-            string? userId = GetUserId();
+            string? userId = User.GetId();
             bool isGymUserExist = await gymUserService.GymUserExistsByUserIdAsync(userId);
             if (!isGymUserExist)
             {

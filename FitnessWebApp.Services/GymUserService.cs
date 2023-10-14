@@ -26,7 +26,7 @@
         }
         public async Task<IEnumerable<ActivitiesSelectionViewModel>> AllActivitiesAsync()
         {
-           return await dbContext.Activities.Select(a => new ActivitiesSelectionViewModel()
+            return await dbContext.Activities.Select(a => new ActivitiesSelectionViewModel()
             {
                 Id = a.Id,
                 Name = a.Name,
@@ -47,7 +47,7 @@
                 Height = model.Height,
                 Age = model.Age,
                 Sex = model.Sex,
-                Activiti = await dbContext.Activities.FirstOrDefaultAsync(a=>a.Id == model.ActivitiId)
+                Activiti = await dbContext.Activities.FirstOrDefaultAsync(a => a.Id == model.ActivitiId)
             };
             await dbContext.GymUsers.AddAsync(user);
             await dbContext.SaveChangesAsync();
@@ -133,8 +133,8 @@
                  .Where(f => f.GymUser.GymUserId.ToString().ToLower() == user.GymUserId.ToString()!.ToLower())
                  .AsQueryable();
 
-            gymUsersQuery =  gymUsersQuery.Where(gu => gu.Food.EatingTime.HasValue && gu.Food.EatingTime.Value.Day == queryModel.Day.Day);
-          
+            gymUsersQuery = gymUsersQuery.Where(gu => gu.Food.EatingTime.HasValue && gu.Food.EatingTime.Value.Day == queryModel.Day.Day);
+
 
             var AllMyneFoodsQueryModel =
              await
@@ -149,16 +149,54 @@
                  Grams = f.Food.Grams.HasValue ? f.Food.Grams.Value : 0
              })
              .ToArrayAsync();
-         
+
             return new MineFoodsQueryModel()
             {
                 Day = queryModel.Day,
                 Foods = AllMyneFoodsQueryModel,
-                
+
             };
 
         }
 
+        public async Task<double> CaloriesForMaintanceAsync(string userId)
+        {
+
+            GymUser? user = await dbContext.GymUsers.Include(gu => gu.Activiti).FirstOrDefaultAsync(gu => gu.UserId.ToString() == userId);
+            if (user == null)
+            {
+                throw new GymUserDoesNotExistException();
+            }
+            GymUserCaloriesCalculateServiceModel serviceModel = new GymUserCaloriesCalculateServiceModel()
+            {
+                Age = user.Age,
+                Height = user.Height,
+                Weight = user.Weight,
+                Sex = user.Sex,
+                ActivitiId = user.Activiti.Id
+            };
+            double activitiValue = 0;
+            switch (serviceModel.ActivitiId)
+            {
+                case 1:
+                    activitiValue = 1.55;
+                    break;
+                case 2:
+                    activitiValue = 1.85;
+                    break;
+                case 3:
+                    activitiValue = 2.2;
+                    break;
+                case 4:
+                    activitiValue = 2.4;
+                    break;
+            }
+            if (user.Sex == 0)
+            {
+                return (10 * serviceModel.Weight + 6.25 * serviceModel.Height - 5 * serviceModel.Age + 5) * activitiValue;
+            }
+            return (10 * serviceModel.Weight + 6.25 * serviceModel.Height - 5 * serviceModel.Age - 161) * activitiValue;
+        }
     }
 
 }
