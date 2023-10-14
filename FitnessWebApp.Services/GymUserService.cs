@@ -179,23 +179,31 @@
             switch (serviceModel.ActivitiId)
             {
                 case 1:
-                    activitiValue = 1.55;
+                    activitiValue = 1.2;
                     break;
                 case 2:
-                    activitiValue = 1.85;
+                    activitiValue = 1.375;
                     break;
                 case 3:
-                    activitiValue = 2.2;
+                    activitiValue = 1.55;
                     break;
                 case 4:
-                    activitiValue = 2.4;
+                    activitiValue = 1.725;
                     break;
             }
             if (user.Sex == 0)
             {
-                return (10 * serviceModel.Weight + 6.25 * serviceModel.Height - 5 * serviceModel.Age + 5) * activitiValue;
+                var BMR = 10 * serviceModel.Weight + 6.25 * serviceModel.Height - 5 * serviceModel.Age + 5;
+                var result = BMR * activitiValue;
+                return Math.Round(result, 2);
             }
-            return (10 * serviceModel.Weight + 6.25 * serviceModel.Height - 5 * serviceModel.Age - 161) * activitiValue;
+            else
+            {
+                var BMR = 10 * serviceModel.Weight + 6.25 * serviceModel.Height - 5 * serviceModel.Age - 161;
+                var result = BMR * activitiValue;
+                return Math.Round(result,2);
+            }
+            
         }
     }
 
