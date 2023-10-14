@@ -102,52 +102,6 @@
            
             return RedirectToAction("Mine","GymUser");
         }
-        //[HttpGet]
-        //public async Task<IActionResult> EatedFood()
-        //{
-        //    string? userId = GetUserId();
-        //    bool isGymUserExist = await gymUserService.GymUserExistsByUserIdAsync(userId);
-        //    if (!isGymUserExist)
-        //    {
-        //        TempData[ErrorMessage] = "You should be a GymUser!";
-        //        return RedirectToAction("Become", "GymUser");
-        //    }
-        //    if (!ModelState.IsValid)
-        //    {
-        //        this.GeneralError();
-        //    }
-
-        //    return View();
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> EatedFood(FilterEatedFoodFormModel model)
-        //{
-        //    await gymUserService.FilterFoodsAsync(model);
-        //    return View(model);
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> Mine()
-        //{
-        //    string? userId = GetUserId();
-        //    bool isGymUserExist = await gymUserService.GymUserExistsByUserIdAsync(userId);
-        //    if (!isGymUserExist)
-        //    {
-        //        TempData[ErrorMessage] = "You should be a GymUser!";
-        //        return RedirectToAction("Become", "GymUser");
-        //    }
-        //   string gymUserId =  await gymUserService.GetUserIdAndReturnGymUserIdAsync(userId);
-        //    if (!ModelState.IsValid)
-        //    {
-        //        this.GeneralError();
-        //    }
-        //    var a = new MineFoodsQueryModel()
-        //    {
-
-        //    };
-        //    var model = await gymUserService.MineFoodsAsync(a,gymUserId);
-        //    return View(model);
-        //}
         [HttpGet]
         public async Task<IActionResult> Mine([FromQuery] MineFoodsQueryModel queryModel)
         {

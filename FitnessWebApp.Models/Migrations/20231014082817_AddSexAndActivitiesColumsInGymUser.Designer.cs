@@ -4,6 +4,7 @@ using FitnessWebApp.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessWebApp.Models.Migrations
 {
     [DbContext(typeof(FitnessAppDbContext))]
-    partial class FitnessAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014082817_AddSexAndActivitiesColumsInGymUser")]
+    partial class AddSexAndActivitiesColumsInGymUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,28 +40,6 @@ namespace FitnessWebApp.Models.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Activities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Not Very Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Lightly Active"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Active"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Very Active"
-                        });
                 });
 
             modelBuilder.Entity("FitnessWebApp.Data.Models.Models.PartOfDay", b =>
@@ -234,6 +214,9 @@ namespace FitnessWebApp.Models.Migrations
                     b.Property<Guid>("GymUserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ActiviiID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ActivitiId")
                         .HasColumnType("int");

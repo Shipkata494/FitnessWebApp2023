@@ -1,14 +1,17 @@
 ﻿namespace FitnessWebApp.Models.Models
 {
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Runtime.Versioning;
+    using FitnessWebApp.Data.Models.Enums;
+    using FitnessWebApp.Data.Models.Models;
     using FitnessWebApp.Models.Data;
     public class GymUser
-    {     
+    {
         public GymUser()
         {
-            GymUserId =  Guid.NewGuid();
-            EatedFood =  new HashSet<Food>();
+            GymUserId = Guid.NewGuid();
+            EatedFood = new HashSet<Food>();
         }
         [Key]
         public Guid GymUserId { get; set; }
@@ -21,6 +24,7 @@
         [Required]
         public int Age { get; set; }
         public ICollection<Food> EatedFood { get; set; }
-        
+        public Sex? Sex { get; set; }
+        public Activities? Activiti { get; set; }
     }
 }

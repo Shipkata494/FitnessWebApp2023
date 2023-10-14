@@ -24,6 +24,11 @@
             public const int NameMinLenght = 2;
             public const int NameMaxLenght = 100;
         }
+        public static class Activities
+        {
+            public const int NameMinLenght = 2;
+            public const int NameMaxLenght = 50;
+        }
 
     }
 }

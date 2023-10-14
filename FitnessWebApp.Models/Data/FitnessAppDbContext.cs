@@ -7,6 +7,7 @@
     using FitnessWebApp.Data.Models.Models;
     using FitnessWebApp.Models.Data;
     using FitnessWebApp.Models.Models;
+    using FitnessWebApp.Data.Models.Configurations;
     public class FitnessAppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public FitnessAppDbContext(DbContextOptions<FitnessAppDbContext> options)
@@ -18,6 +19,7 @@
         public DbSet<Food> Foods { get; set; }
         public DbSet<GymUsersFoods> GymUsersFoods { get; set; }
         public DbSet<PartOfDay> PartOfDay { get; set; }
+        public DbSet<Activities> Activities { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<GymUsersFoods>()
@@ -26,15 +28,10 @@
                     gf.FoodId,
                     gf.GymUserId
                 });
-            builder.Entity<Food>()
-                .HasData(new Food { FoodId = 1, Name = "Chicken breast", Protein = 31, Fat = 3.6, Carbs = 0 },
-                         new Food { FoodId = 2, Name = "Beef steak", Protein = 35, Fat = 10, Carbs = 0 });
-            builder.Entity<PartOfDay>()
-                .HasData(new PartOfDay { Id = 1, Name = "Breakfast" },
-                         new PartOfDay { Id = 2, Name = "Lunch" },
-                         new PartOfDay { Id = 3, Name = "Diner" },
-                         new PartOfDay { Id = 4, Name = "Snack" });
-                
+            builder.ApplyConfiguration(new FoodEntityConfiguration());
+            builder.ApplyConfiguration(new PartOfDayEntityConfiguration());
+            builder.ApplyConfiguration(new ActivitiesEntityConfiguration());
+
             base.OnModelCreating(builder);
         }
     }
