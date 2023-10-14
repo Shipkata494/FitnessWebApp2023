@@ -23,7 +23,9 @@
         [Required]
         public int Age { get; set; }
         public ICollection<Food> EatedFood { get; set; }
-        public Sex? Sex { get; set; }
-        public Activities? Activiti { get; set; }
+        [Required]
+        public Sex Sex { get; set; }
+        [Required]
+        public Activities Activiti { get; set; } = null!;
     }
 }
