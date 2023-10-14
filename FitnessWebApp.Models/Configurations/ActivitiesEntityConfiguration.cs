@@ -1,14 +1,9 @@
-﻿using FitnessWebApp.Data.Models.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FitnessWebApp.Data.Models.Configurations
+﻿namespace FitnessWebApp.Data.Models.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    
+    using FitnessWebApp.Data.Models.Models;
     public class ActivitiesEntityConfiguration : IEntityTypeConfiguration<Activities>
     {
         public void Configure(EntityTypeBuilder<Activities> builder)

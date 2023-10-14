@@ -1,8 +1,7 @@
 ﻿namespace FitnessWebApp.Models.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Runtime.Versioning;
+
     using FitnessWebApp.Data.Models.Enums;
     using FitnessWebApp.Data.Models.Models;
     using FitnessWebApp.Models.Data;

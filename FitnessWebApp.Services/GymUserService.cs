@@ -10,6 +10,7 @@
     using FitnessWebApp.Web.Data;
     using FitnessWebApp.Web.ViewModels.Models.GymUser;
     using FitnessWebApp.Web.ViewModels.Models.Food;
+    using FitnessWebApp.Web.ViewModels.Models.Activities;
 
     public class GymUserService : IGymUserService
     {
@@ -22,6 +23,14 @@
             dbContext = _dbContext;
             partOfDayService = _partOfDayService;
             foodService = _foodService;
+        }
+        public async Task<IEnumerable<ActivitiesSelectionViewModel>> AllActivitiesAsync()
+        {
+           return await dbContext.Activities.Select(a => new ActivitiesSelectionViewModel()
+            {
+                Id = a.Id,
+                Name = a.Name,
+            }).ToListAsync();
         }
 
         public async Task<bool> GymUserExistsByUserIdAsync(string? userId)
@@ -37,6 +46,8 @@
                 Weight = model.Weight,
                 Height = model.Height,
                 Age = model.Age,
+                Sex = model.Sex,
+                Activiti = await dbContext.Activities.FirstOrDefaultAsync(a=>a.Id == model.ActivitiId)
             };
             await dbContext.GymUsers.AddAsync(user);
             await dbContext.SaveChangesAsync();

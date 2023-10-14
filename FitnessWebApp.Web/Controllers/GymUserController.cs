@@ -8,6 +8,8 @@
     using FitnessWebApp.Web.ViewModels.Models.Food;
 
     using static FitnessWebApp.Common.NotificationMessegeConstants;
+    using FitnessWebApp.Web.ViewModels.Models.Activities;
+
     public class GymUserController : BaseController
     {
         private readonly IGymUserService gymUserService;
@@ -32,8 +34,12 @@
 
                 return RedirectToAction("Index", "Home");
             }
+            var model = new BecomeGymUserFormModel()
+            {
+                Activities = await gymUserService.AllActivitiesAsync(),
+            };
 
-            return View();
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Become(BecomeGymUserFormModel model)
