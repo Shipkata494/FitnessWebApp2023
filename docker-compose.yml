@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  fitnesswebapp.web:
+    image: ${DOCKER_REGISTRY-}fitnesswebappweb
+    build:
+      context: .
+      dockerfile: FitnessWebApp.Web/Dockerfile
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    ports:
+      - '1433:1433'
+    environment:
+      SQL_USER: 'Shipkata494'
+      SQL_PASSWORD: 'anton'
+      SQL_DATABASE: 'FitnessWebApp'
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+volumes:
+  sqlserver_data:
